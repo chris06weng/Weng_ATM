@@ -1,2 +1,2 @@
-user1@example.com: 1050.0
-user2@example.com: 550.0
+Chris: 6100.0
+Aidan: 5000.0
