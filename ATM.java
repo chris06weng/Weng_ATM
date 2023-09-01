@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class ATM {
     static HashMap<String, Double> accounts = new HashMap<String, Double>();
 
-    public static void openAccount(String userID, Double amnt) throws Exception {
+    public static void openAccount(String userID, double amnt) throws Exception {
         if (accounts.containsKey(userID)) {
             throw new Exception("User " + userID + " is not available, please try again.");
         } else {
@@ -28,7 +28,7 @@ public class ATM {
         return accounts.get(userID);
     }
 
-    public static void depositMoney(String userID, Double amnt) throws Exception {
+    public static void depositMoney(String userID, double amnt) throws Exception {
         if (!check(userID))
             throw new Exception("User does not exist. You're also broke AF.");
         Double bal = accounts.get(userID);
@@ -37,7 +37,7 @@ public class ATM {
         System.out.println("New balance:" + bal);
     }
 
-    public static void withdrawMoney(String userID, Double amnt) throws Exception {
+    public static void withdrawMoney(String userID, double amnt) throws Exception {
         if (!check(userID))
             throw new Exception("User does not exist. You're also broke AF.");
         Double bal = accounts.get(userID);
