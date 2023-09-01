@@ -41,7 +41,7 @@ public class ATM {
         Double bal = accounts.get(userID);
         bal += amnt;
         accounts.replace(userID, bal);
-        System.out.println("New balance:" + bal);
+        System.out.println("New balance: " + bal);
     }
 
     public static void withdrawMoney(String userID, double amnt) throws Exception {
@@ -61,15 +61,13 @@ public class ATM {
         Double bal1 = accounts.get(userID1);
         Double bal2 = accounts.get(userID2);
         if (amnt > bal1) {
-            System.out.println ("Failed transfer, insufficient Funds. You are broke AF.")
-            return false; 
-        }
-        else
-        {
+            System.out.println("Failed transfer, insufficient Funds. You are broke AF.");
+            return false;
+        } else {
             bal1 -= amnt;
             bal2 += amnt;
-            accounts.replace (userID1, bal1);
-            accounts.replace (userID2, bal2);
+            accounts.replace(userID1, bal1);
+            accounts.replace(userID2, bal2);
             return true;
         }
     }
