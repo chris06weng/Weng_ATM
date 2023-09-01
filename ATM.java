@@ -1,13 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ATM {
     static HashMap<String, Double> accounts = new HashMap<String, Double>();
+    static ArrayList<String> userIDs = new ArrayList<String>();
 
     public static void openAccount(String userID, double amnt) throws Exception {
         if (accounts.containsKey(userID)) {
             throw new Exception("User " + userID + " is not available, please try again.");
         } else {
             accounts.put(userID, amnt);
+            userIDs.add(userID);
         }
     }
 
@@ -17,6 +23,7 @@ public class ATM {
         Double bal = accounts.get(userID);
         if (bal == 0) {
             accounts.remove(userID);
+            userIDs.remove(userID);
         } else {
             throw new Exception("Your account still has " + bal + ", please remove balance before closing account.");
         }
@@ -65,6 +72,21 @@ public class ATM {
             accounts.replace (userID2, bal2);
             return true;
         }
+    }
+
+    public static void audit() throws FileNotFoundException {
+        File file = new File("AccountAudit.txt");
+        file.delete();
+
+        File newFile = new File("AccountAudit.txt");
+        PrintWriter pw = new PrintWriter(newFile);
+
+        for (int k = 0; k < userIDs.size(); k++) {
+            String input = "" + userIDs.get(k) + ": " + accounts.get(userIDs.get(k));
+            pw.print(input + "\n");
+        }
+
+        pw.close();
     }
 
     static private boolean check(String userID) {
