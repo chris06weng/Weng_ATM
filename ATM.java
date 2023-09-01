@@ -48,11 +48,23 @@ public class ATM {
         System.out.println("New balance: " + bal);
     }
 
-    public static void transferMoney(String userID1, String userID2) throws Exception {
+    public static boolean transferMoney(String userID1, String userID2, double amnt) throws Exception {
         if ((!check(userID1)) || (!check(userID2)))
             throw new Exception("One or both users do not exist");
         Double bal1 = accounts.get(userID1);
         Double bal2 = accounts.get(userID2);
+        if (amnt > bal1) {
+            System.out.println ("Failed transfer, insufficient Funds. You are broke AF.")
+            return false; 
+        }
+        else
+        {
+            bal1 -= amnt;
+            bal2 += amnt;
+            accounts.replace (userID1, bal1);
+            accounts.replace (userID2, bal2);
+            return true;
+        }
     }
 
     static private boolean check(String userID) {
